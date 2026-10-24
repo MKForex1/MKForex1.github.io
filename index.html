@@ -1,0 +1,64 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#101827">
+<title>MKForex1 Search</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#101827;color:#fff;min-height:100vh;display:flex;flex-direction:column}
+header{padding:22px;text-align:right;font-size:20px;font-weight:bold}
+main{width:92%;max-width:650px;margin:auto;text-align:center;padding:35px 0 90px}
+.logo{font-size:40px;font-weight:bold;margin-bottom:10px;color:#72a7ff}
+p{color:#b8c3d6;margin-bottom:28px}
+.search{display:flex;background:white;border-radius:16px;padding:6px;gap:6px}
+input{flex:1;min-width:0;border:0;outline:0;padding:14px;font-size:17px;color:#172033;border-radius:12px}
+button{border:0;border-radius:12px;padding:13px 17px;background:#3978f6;color:white;font-size:16px;cursor:pointer}
+.engines{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:22px}
+.engines button{background:#202d42;border:1px solid #35435b}
+.engines button.active{background:#3978f6}
+.note{font-size:13px;color:#9ba9bd;margin-top:35px}
+footer{text-align:center;color:#8190a5;padding:20px;font-size:13px}
+</style>
+</head>
+<body>
+<header>MKForex1 <span style="color:#72a7ff">Search</span></header>
+<main>
+<div class="logo">MK Search</div>
+<p>اكتشف الإنترنت بطريقتك</p>
+<form id="searchForm" class="search">
+<input id="q" type="search" placeholder="ابحث عن أي شيء..." aria-label="عبارة البحث" required>
+<button type="submit">بحث</button>
+</form>
+<div class="engines">
+<button type="button" class="active" data-engine="google">Google</button>
+<button type="button" data-engine="bing">Bing</button>
+<button type="button" data-engine="duck">DuckDuckGo</button>
+</div>
+<div class="note">بحث سريع وسهل • مجاني للجميع</div>
+</main>
+<footer>© MK Search</footer>
+<script>
+let engine="google";
+const urls={
+google:"https://www.google.com/search?q=",
+bing:"https://www.bing.com/search?q=",
+duck:"https://duckduckgo.com/?q="
+};
+document.querySelectorAll("[data-engine]").forEach(button=>{
+button.addEventListener("click",()=>{
+engine=button.dataset.engine;
+document.querySelectorAll("[data-engine]").forEach(b=>b.classList.toggle("active",b===button));
+});
+});
+document.getElementById("searchForm").addEventListener("submit",e=>{
+e.preventDefault();
+const q=document.getElementById("q").value.trim();
+if(q) window.location.href=urls[engine]+encodeURIComponent(q);
+});
+</script>
+</body>
+  </html>
+  
